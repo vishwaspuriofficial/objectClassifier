@@ -60,10 +60,10 @@ if start:
 
 
 while camOn:
-    _, img = camera.read()
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    _, frame = camera.read()
+    img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-    classIds, confs, bbox = net.detect(img, confThreshold=thres)
+    classIds, confs, bbox = net.detect(frame, confThreshold=thres)
     if len(classIds) != 0:
 
         for classId, confidence, box in zip(classIds.flatten(), confs.flatten(), bbox):
