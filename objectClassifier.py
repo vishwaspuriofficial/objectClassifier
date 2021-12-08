@@ -112,12 +112,13 @@ if start:
 
 
 while camOn:
-    _, frame = camera.read()
-    img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    cv2.rectangle(img, (5,5),(100,100), color=(0, 255, 0), thickness=2)
-    cv2.putText(img, "dsa", (100,100),
-                cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 2)
-    FRAME_WINDOW.image(img)
+    ret, frame = camera.read()
+    if ret:
+        img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        cv2.rectangle(img, (5,5),(100,100), color=(0, 255, 0), thickness=2)
+        cv2.putText(img, "dsa", (100,100),
+                    cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 2)
+        FRAME_WINDOW.image(img)
     if stop:
         break
 
