@@ -82,26 +82,25 @@
 #     st.write("2. Slide the camera slider to on")
 #     st.write("3. Reload your page!")
 
-import streamlit as st
-import cv2 as cv
+import numpy as np
+import cv2
 
-@st.cache(allow_output_mutation=True)
-def get_cap():
-    return cv.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 
-cap = get_cap()
-
-frameST = st.empty()
-
-while True:
+while(True):
+    # Capture frame-by-frame
     ret, frame = cap.read()
-    # Stop the program if reached end of video
-    if not ret:
-        st.write("Done processing !!!")
-        # Release device
-        cap.release()
+
+    # Our operations on the frame come here
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+    # Display the resulting frame
+    cv2.imshow('frame',gray)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
-    frameST.image(frame, channels="BGR")
+# When everything done, release the capture
+cap.release()
+cv2.destroyAllWindows()
 
 
