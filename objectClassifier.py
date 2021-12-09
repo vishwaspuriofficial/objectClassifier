@@ -87,12 +87,11 @@ import cv2 as cv
 
 @st.cache(allow_output_mutation=True)
 def get_cap():
-    return cv.VideoCapture(0)
+    return cv.VideoCapture(1)
 
 cap = get_cap()
 
 frameST = st.empty()
-param=st.sidebar.slider('chose your value')
 
 while True:
     ret, frame = cap.read()
