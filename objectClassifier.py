@@ -30,7 +30,7 @@ col = st.empty()
 
 start = col.button('Turn on Camera')
 FRAME_WINDOW = st.image([])
-camera = cv2.VideoCapture(0)
+camera = cv2.VideoCapture(1)
 
 camOn = False
 
@@ -43,18 +43,19 @@ if start:
 
 while camOn:
     ret, frame = camera.read()
-    img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    classIds, confs, bbox = net.detect(frame, confThreshold=thres)
-    if len(classIds) != 0:
+    if ret:
+        img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        classIds, confs, bbox = net.detect(frame, confThreshold=thres)
+        if len(classIds) != 0:
 
-        for classId, confidence, box in zip(classIds.flatten(), confs.flatten(), bbox):
-            if confidence > 0.6:
-                cv2.rectangle(img, box, color=(0, 255, 0), thickness=2)
-                cv2.putText(img, classNames[classId - 1].upper(), (box[0] + 10, box[1] + 30),
-                            cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 2)
-                # cv2.putText(img,str(round(confidence*100,2)),(box[0]+200,box[1]+30),
-                # cv2.FONT_HERSHEY_COMPLEX,1,(0,255,0),2)
-                # Show Confidence Level
+            for classId, confidence, box in zip(classIds.flatten(), confs.flatten(), bbox):
+                if confidence > 0.6:
+                    cv2.rectangle(img, box, color=(0, 255, 0), thickness=2)
+                    cv2.putText(img, classNames[classId - 1].upper(), (box[0] + 10, box[1] + 30),
+                                cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 2)
+                    # cv2.putText(img,str(round(confidence*100,2)),(box[0]+200,box[1]+30),
+                    # cv2.FONT_HERSHEY_COMPLEX,1,(0,255,0),2)
+                    # Show Confidence Level
     FRAME_WINDOW.image(img)
     if stop:
         break
