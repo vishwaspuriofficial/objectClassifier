@@ -91,7 +91,7 @@ col = st.empty()
 
 start = col.button('Turn on Camera')
 FRAME_WINDOW = st.image([])
-camera = cv2.VideoCapture(0)
+camera = cv2.VideoCapture(cv2.CAP_V4L2)
 
 camOn = False
 
