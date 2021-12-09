@@ -30,7 +30,20 @@ col = st.empty()
 
 start = col.button('Turn on Camera')
 FRAME_WINDOW = st.image([])
-camera = cv2.VideoCapture(0)
+
+while True:
+
+    if cv2.VideoCapture(0):
+        port = 0
+    elif cv2.VideoCapture(1):
+        port = 1
+    elif cv2.VideoCapture(2):
+        port = 2
+
+    camera = cv2.VideoCapture(port)
+    break
+
+st.write("Camera: ",port)
 
 camOn = False
 
