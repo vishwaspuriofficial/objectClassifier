@@ -60,7 +60,6 @@ while camOn:
         break
 
 camera.release()
-cv2.destroyAllWindows()
 
 
 #Info Block
