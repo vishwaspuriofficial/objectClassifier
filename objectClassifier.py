@@ -82,19 +82,23 @@
 #     st.write("2. Slide the camera slider to on")
 #     st.write("3. Reload your page!")
 
-import cv2
 import streamlit as st
+import cv2 as cv
 
-st.title("Webcam Live Feed")
-run = st.button('Start')
-FRAME_WINDOW = st.image([])
-camera = cv2.VideoCapture(0)
+cap = cv.VideoCapture(0)
 
-while run:
-    _, frame = camera.read()
-    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    FRAME_WINDOW.image(frame)
-else:
-    st.write('Stopped')
+frameST = st.empty()
+
+while True:
+    ret, frame = cap.read()
+    # Stop the program if reached end of video
+    if not ret:
+        print("Done processing !!!")
+        cv.waitKey(3000)
+        # Release device
+        cap.release()
+        break
+
+    frameST.image(frame, channels="BGR")
 
 
