@@ -97,7 +97,7 @@ while True:
     ret, frame = cap.read()
     # Stop the program if reached end of video
     if not ret:
-        print("Done processing !!!")
+        st.write("Done processing !!!")
         # Release device
         cap.release()
         break
