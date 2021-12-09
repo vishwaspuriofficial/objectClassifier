@@ -83,9 +83,9 @@
 #     st.write("3. Reload your page!")
 
 import streamlit as st
-import cv2 as cv
+import cv2
 
-cap = cv.VideoCapture(0)
+cap = cv2.VideoCapture(0)
 
 frameST = st.empty()
 
