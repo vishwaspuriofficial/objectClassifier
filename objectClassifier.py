@@ -84,40 +84,17 @@
 
 import cv2
 import streamlit as st
-import time
 
-
-col = st.empty()
-
-start = col.button('Turn on Camera')
+st.title("Webcam Live Feed")
+run = st.button('Start')
 FRAME_WINDOW = st.image([])
-camera = cv2.VideoCapture(cv2.CAP_V4L2)
+camera = cv2.VideoCapture(0)
 
-camOn = False
-
-if start:
-    with st.spinner('Turning camera on!'):
-        time.sleep(3)
-    stop = col.button("Turn off Camera")
-    camOn = True
-
-
-while camOn:
-    ret, frame = camera.read()
-    if ret:
-        img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        cv2.rectangle(img, (5,5),(100,100), color=(0, 255, 0), thickness=2)
-        cv2.putText(img, "dsa", (100,100),
-                    cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 2)
-        FRAME_WINDOW.image(img)
-    if stop:
-        break
+while run:
+    _, frame = camera.read()
+    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    FRAME_WINDOW.image(frame)
+else:
+    st.write('Stopped')
 
 
-
-#Info Block
-st.write("If camera doesn't turn on, please ensure that your camera permissions are on!")
-with st.expander("Steps to enable permission"):
-    st.write("1. Click the lock button at the top left of the page")
-    st.write("2. Slide the camera slider to on")
-    st.write("3. Reload your page!")
