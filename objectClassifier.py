@@ -2,7 +2,6 @@ import streamlit as st
 import mediapipe as mp
 import cv2
 import time
-from deepface import DeepFace
 faceCascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 st.set_page_config(layout="wide")
 
