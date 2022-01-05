@@ -21,7 +21,7 @@ import av
 RTC_CONFIGURATION = RTCConfiguration(
     {"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]}
 )
-st.write("Press start to turn on Camera!")
+st.write("Press start to turn on camera and show it some objects!")
 
 thres = 0.45  # Threshold to detect object
 mpPose = mp.solutions.pose
@@ -84,5 +84,7 @@ def objectClassifier():
         st.write("2. Slide the camera slider to on")
         st.write("3. Reload your page!")
 
+    st.subheader("Possible Output Objects")
+    st.write("'Coco.names' Data List, https://github.com/pjreddie/darknet/blob/master/data/coco.names")
 if __name__ == "__main__":
     objectClassifier()
