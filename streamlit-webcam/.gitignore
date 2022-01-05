@@ -1,0 +1,14 @@
+# Project files
+build/
+dist/
+
+# IDE files
+.idea/
+
+# Python stuff
+__pycache__
+venv/
+
+# Frontend stuff
+yarn.lock
+node_modules/
